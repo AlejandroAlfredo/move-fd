@@ -1,3 +1,4 @@
+# python 3
 # programa scripting para mover archivos y carpetas.
 # scripting program to move files and folders.
 import os
@@ -13,8 +14,7 @@ def mover_archivo(archive, output):
         print(f"{archive} not found!")
     elif not os.path.exists(output):
         print(f"{output} does not exist!")
-    else:
-        print("???")
+
 
 # example: python move-fd.py -x "file.txt" -o "c:\Users\PROFILE\Desktop"
 parser = argparse.ArgumentParser(description='script to easily move files from one place to another')

@@ -7,15 +7,16 @@ import argparse
 
 
 def mover_archivo(archive, output):
-    if os.path.exists(archive) and os.path.exists(output):
-        shutil.move(archive, output)
-        print("{} has been moved!".format(archive))
-    elif not os.path.exists(archive):
-        print("{} not found!".format(archive))
-    elif not os.path.exists(output):
-        print("{} does not exist!".format(output))
-    else:
-        print("?")
+    try:
+        if not os.path.exists(archive):
+            print("'{}' not found!".format(archive))
+        if not os.path.exists(output):
+            print("'{}' does not exist!".format(output))
+        if os.path.exists(archive) and os.path.exists(output):
+            shutil.move(archive, output)
+            print("'{}' has been moved!".format(archive))
+    except IOError as err:
+        print(str(err))
 
 
 # example: python move-fd.py -x "file.txt" -o "c:\Users\PROFILE\Desktop"

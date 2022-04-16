@@ -7,6 +7,7 @@ I recommend viewing the script help.
 ```
 python move-fd.py -h
 ```
+Open '**cmd**' and try the following command:
 ```
 python move-fd.py -x "file_or_folder" -o "C:\Users\%USERNAME%\Desktop"
 ```

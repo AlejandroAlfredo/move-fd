@@ -101,7 +101,7 @@ group_search.add_argument('--files', dest='files_found',
 
 group_search.add_argument('--folders', dest='folders_found',
                           action='store_true',
-                          help="total numbres of folders.")
+                          help="total number of folders.")
 
 group_search.add_argument('--get-files', dest='get_files',
                           action='store_true',

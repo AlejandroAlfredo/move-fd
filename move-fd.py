@@ -127,16 +127,16 @@ if __name__ == '__main__':
         num_files = var_sff.files_found()
         print(">> files found: " + str(num_files))
 
+    if args.get_files:
+        print("~ files ~")
+        for f in var_sff.get_files():
+            print("=> " + str(f))
+
     if args.folders_found:
         num_folders = var_sff.folders_found()
         print(">> folders found: " + str(num_folders))
 
-    if args.get_files:
-        print("=> files")
-        for f in var_sff.get_files():
-            print(f)
-
     if args.get_folders:
-        print("=> folders")
+        print("~ folders ~")
         for f in var_sff.get_folders():
-            print(f)
+            print("=> " + str(f))

@@ -23,16 +23,16 @@ class Search_FF:
         else:
             print("'{}' does no exist!".format(self.__path))
 
-    def get_files(self):
+    def get_files(self) -> list:
         return self.__files
 
-    def get_folders(self):
+    def get_folders(self) -> list:
         return self.__folders
 
-    def files_found(self):
+    def files_found(self) -> int:
         return self.__counter_files
 
-    def folders_found(self):
+    def folders_found(self) -> int:
         return self.__counter_folders
 
     def __search_folders(self, folder: str):

@@ -17,11 +17,11 @@ class Search_FF:
         self.__counter_folders = 0
         self.__files = []
         self.__folders = []
-        if os.path.exists(self.__path):
+        if os.path.isdir(self.__path):
             self.__search_folders(self.__path)
             self.__search_files(self.__path)
         else:
-            print("'{}' does no exist!".format(self.__path))
+            print("'{}' this does not exist or is not a folder!".format(self.__path))
 
     def get_files(self) -> list:
         return self.__files
@@ -91,7 +91,7 @@ def start_search_ff(path: str):
         (Search_FF or raise)
     """
     var_path = None
-    if os.path.isdir(path):
+    if os.path.exists(path):
         var_path = Search_FF(path)
     else:
         raise ValueError('Your path does not exist: ' + str(var_path))
@@ -135,9 +135,10 @@ args = parser.parse_args()
 if __name__ == '__main__':
     var_sff = None
     if args.archive:
-        var_sff = start_search_ff(args.archive)
-        if args.archive and args.output:
-            move_file(args.archive, args.output)
+        var_sff = Search_FF(args.archive)
+
+    if args.archive and args.output:
+        move_file(args.archive, args.output)
 
     if args.files_found:
         num_files = var_sff.files_found()

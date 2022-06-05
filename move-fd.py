@@ -81,23 +81,6 @@ def move_file(archive: str, output: str):
         raise
 
 
-def start_search_ff(path: str):
-    """start search-ff
-
-    Args:
-        path (str): your path
-
-    Returns:
-        (Search_FF or raise)
-    """
-    var_path = None
-    if os.path.exists(path):
-        var_path = Search_FF(path)
-    else:
-        raise ValueError('Your path does not exist: ' + str(var_path))
-    return var_path
-
-
 parser = argparse.ArgumentParser(
     description='Script to easily move files from one place to another.')
 

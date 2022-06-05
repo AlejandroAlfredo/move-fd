@@ -56,6 +56,7 @@ class Search_FF:
             files.append(full_path)
         for f in files:
             if os.path.isfile(f):
+                time.sleep(1/100)
                 name_file = str(f).split('\\')
                 if name_file[len(name_file)-1] == "move-fd.py":
                     continue

@@ -43,7 +43,6 @@ class Search_FF:
             files.append(full_path)
         for f in files:
             if os.path.isdir(f):
-                time.sleep(1/100)
                 self.__counter_folders += 1
                 self.__folders.append(f)
                 self.__search_folders(f)
@@ -63,7 +62,6 @@ class Search_FF:
                 self.__counter_files += 1
                 self.__files.append(f)
             if os.path.isdir(f):
-                time.sleep(1/100)
                 self.__search_files(f)
 
 
@@ -131,6 +129,7 @@ if __name__ == '__main__':
     if args.get_files:
         print("~ files ~")
         for f in var_sff.get_files():
+            time.sleep(1/100)
             print("=> " + str(f))
 
     if args.folders_found:
@@ -140,4 +139,5 @@ if __name__ == '__main__':
     if args.get_folders:
         print("~ folders ~")
         for f in var_sff.get_folders():
+            time.sleep(1/100)
             print("=> " + str(f))

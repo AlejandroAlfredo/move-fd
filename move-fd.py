@@ -72,7 +72,7 @@ def main(args: argparse):
         print("(folders found): " + str(num_folders))
 
     if args.get_folders:
-        for f in sff.folders_found():
+        for f in sff.get_folders():
             time.sleep(0.100)
             print("(folder): " + str(f))
 

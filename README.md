@@ -9,7 +9,11 @@ I recommend viewing the script help.
     ```
     Open the '**cmd**' and try the following command:
     ```
-    python move-fd.py -x "file_or_folder" -o C:\Users\%USERNAME%\Desktop
+    python move-fd.py -x "file_or_folder" -o %USERPROFILE%\Desktop
+    ```
+    If you prefer to use '**powershell**', try using the following command:
+    ```
+    python move-fd.py -x "file_or_folder" -o $ENV:userprofile\Desktop
     ```
 * For Linux Users:
     ```
@@ -18,6 +22,8 @@ I recommend viewing the script help.
     ```
     python3 move-fd.py -x "file_or_folder" -o ~/Desktop
     ```
+**Note**: It is recommended to use the full path.
+
 ## LICENSE
 move-fd is free software and may be redistributed under the terms specified in the [license]
 

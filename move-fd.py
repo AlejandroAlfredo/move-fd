@@ -47,7 +47,6 @@ group_search.add_argument('--get-folders',
                           help=("print folders, "
                                 "(recommendation do not use this if there are many folders)"))
 
-
 args = parser.parse_args()
 
 

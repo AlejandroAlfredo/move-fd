@@ -14,12 +14,16 @@ parser = argparse.ArgumentParser(
 
 group = parser.add_argument_group(description="[move-fd]")
 
-group.add_argument('-x', '--archive',
-                   type=str, metavar='',
+group.add_argument('-x',
+                   '--archive',
+                   type=str,
+                   metavar='',
                    help='file or folder name, example -x "one.txt"')
 
-group.add_argument('-o', '--output',
-                   type=str, metavar='',
+group.add_argument('-o',
+                   '--output',
+                   type=str, 
+                   metavar='',
                    help='output example: -o "{}"'.format(os.getcwd()))
 
 group_search = parser.add_argument_group(

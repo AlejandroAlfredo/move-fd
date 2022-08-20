@@ -1,4 +1,4 @@
-# python 3.10.5
+# python 3.10.4
 import os
 import argparse
 import time
@@ -22,7 +22,7 @@ group.add_argument('-x',
 
 group.add_argument('-o',
                    '--output',
-                   type=str, 
+                   type=str,
                    metavar='',
                    help='output example: -o "{}"'.format(os.getcwd()))
 

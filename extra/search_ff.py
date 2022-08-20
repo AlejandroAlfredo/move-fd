@@ -23,7 +23,8 @@ class Search_FF:
             self.__search_folders(self.__path)
             self.__search_files(self.__path)
         else:
-            print("(Search_FF): '{}' this does not exist or is not a folder!".format(self.__path))
+            print("(Search_FF): '{}' this does not exist or is not a folder!".format(
+                self.__path))
 
     def get_files(self) -> list:
         return self.__files
@@ -39,28 +40,45 @@ class Search_FF:
 
     def __search_folders(self, folder: str):
         files = []
+        full_path = ""
         current = os.listdir(folder)
         for x in current:
-            full_path = folder + "\\" + x
+            if os.name in ('linux', 'posix', 'osx'):
+                full_path = folder + "/" + x
+            else:
+                if os.name in ('nt', 'dos'):
+                    full_path = folder + "\\" + x
             files.append(full_path)
         for f in files:
             if os.path.isdir(f):
+                time.sleep(0.001)
                 self.__counter_folders += 1
                 self.__folders.append(f)
                 self.__search_folders(f)
 
     def __search_files(self, folder: str):
         files = []
+        full_path = ""
         current = os.listdir(folder)
+        # name_file = []
         for x in current:
-            full_path = folder + "\\" + x
+            if os.name in ('linux', 'posix', 'osx'):
+                full_path = folder + "/" + x
+            else:
+                if os.path in ('nt', 'dos'):
+                    full_path = folder + "\\" + x
             files.append(full_path)
         for f in files:
             if os.path.isfile(f):
-                time.sleep(0.100)
-                name_file = str(f).split('\\')
-                if name_file[len(name_file)-1] == "move-fd.py":
-                    continue
+                time.sleep(0.001)
+                # [ This is not very important ]
+                # if os.name in ('linux', 'posix', 'osx'):
+                #     name_file = str(f).split('/')
+                # else:
+                #     if os.name in ('nt', 'dos'):
+                #         name_file = str(f).split('\\')
+                # if name_file[len(name_file)-1] == "move-fd.py":
+                #     continue
                 self.__counter_files += 1
                 self.__files.append(f)
             if os.path.isdir(f):

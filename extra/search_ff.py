@@ -65,7 +65,7 @@ class Search_FF:
             if os.name in ('linux', 'posix', 'osx'):
                 full_path = folder + "/" + x
             else:
-                if os.path in ('nt', 'dos'):
+                if os.name in ('nt', 'dos'):
                     full_path = folder + "\\" + x
             files.append(full_path)
         for f in files:

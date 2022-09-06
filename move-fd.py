@@ -1,4 +1,4 @@
-# python 3.10.4
+# python 3.10.6
 import os
 import argparse
 import time
@@ -54,7 +54,7 @@ group_search.add_argument('--get-folders',
 args = parser.parse_args()
 
 
-def main(args: argparse):
+def main(args):
     sff = None  # search_ff
     if args.archive:
         sff = search_ff.Search_FF(args.archive)

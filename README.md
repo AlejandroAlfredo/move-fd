@@ -27,4 +27,4 @@ I recommend viewing the script help.
 ## LICENSE
 move-fd is free software and may be redistributed under the terms specified in the [license]
 
-<!-- [license]: https://github.com/AlejandroAlfredo/move-fd/blob/main/LICENSE -->
+[license]: https://github.com/AlejandroAlfredo/move-fd/blob/main/LICENSE

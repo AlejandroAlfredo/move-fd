@@ -8,7 +8,7 @@ from movefd.searchfd import SearchFD
 
 
 parser = argparse.ArgumentParser(
-    prog="move-fd.py",
+    prog="move-fd",
     description="Script to easily move files from one place to another.",
 )
 

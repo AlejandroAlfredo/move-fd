@@ -8,7 +8,7 @@ build_exe_options = {
 
 setup(
     name="move-fd",
-    version="0.1",
+    version="1.2",
     description="Scripting program to move files and folders",
     options={"build_exe": build_exe_options},
     executables=[

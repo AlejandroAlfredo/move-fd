@@ -6,6 +6,17 @@ command = (
 )
 
 p1 = subprocess.Popen(
-    command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+    command,
+    shell=True,
+    stdout=subprocess.PIPE,
+    stderr=subprocess.PIPE,
+    universal_newlines=True,
 )
-p1.wait()
+out, err = p1.communicate()
+
+print(out)
+print(err)
+if p1.returncode == 0:
+    print("Command success")
+else:
+    print(f"Command failed. Return code: {p1.returncode}")

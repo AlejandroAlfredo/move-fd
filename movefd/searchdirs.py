@@ -27,8 +27,8 @@ class SearchDirectories(threading.Thread):
                 full_path = directory + "\\" + file
             files.append(full_path)
         for file in files:
+            time.sleep(1 / 1000)
             if os.path.isdir(file):
-                time.sleep(1 / 1000)
                 self.__counter += 1
                 self.__directories.append(file)
                 self.__search(file)

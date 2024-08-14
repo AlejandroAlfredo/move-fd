@@ -27,8 +27,8 @@ class SearchFiles(threading.Thread):
                 full_path = directory + "\\" + file
             files.append(full_path)
         for file in files:
+            time.sleep(1 / 1000)
             if os.path.isfile(file):
-                time.sleep(1 / 1000)
                 self.__counter += 1
                 self.__files.append(file)
             elif os.path.isdir(file):

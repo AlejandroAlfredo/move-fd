@@ -15,7 +15,7 @@ group_movefd.add_argument(
     type=str,
     nargs=1,
     metavar="<file>",
-    help='file or folder name, example -x "one.txt"',
+    help='file or dir name, example -x "one.txt"',
 )
 
 group_movefd.add_argument(
@@ -30,7 +30,10 @@ group_movefd.add_argument(
 group_search = parser.add_argument_group(description="[search]* ~> Only for folders")
 
 group_search.add_argument(
-    "--files", dest="files_found", action="store_true", help="total number of files."
+    "--files",
+    dest="files_found",
+    action="store_true",
+    help="total number of files.",
 )
 
 group_search.add_argument(

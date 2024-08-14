@@ -1,8 +1,6 @@
 import os
 import time
 import threading
-from .searchfiles import SearchFiles
-from .searchdirs import SearchDirectories
 
 
 class SearchFD(threading.Thread):
@@ -20,21 +18,28 @@ class SearchFD(threading.Thread):
         self.__files = []
         self.__directories = []
 
+    def __search(self, directory: str):
+        files = []
+        full_path = ""
+        current = os.listdir(directory)
+        for file in current:
+            if os.name in ("linux", "posix", "osx"):
+                full_path = directory + "/" + file
+            elif os.name in ("nt", "dos"):
+                full_path = directory + "\\" + file
+            files.append(full_path)
+        for file in files:
+            time.sleep(1 / 1000)
+            if os.path.isfile(file):
+                self.__counter_files += 1
+                self.__files.append(file)
+            elif os.path.isdir(file):
+                self.__counter_dirs += 1
+                self.__directories.append(file)
+                self.__search(file)
+
     def run(self):
-        searchfiles = SearchFiles(self.path)
-        searchdirs = SearchDirectories(self.path)
-
-        searchfiles.start()
-        searchdirs.start()
-
-        searchfiles.join()
-        searchdirs.join()
-
-        self.__counter_files = searchfiles.files_found
-        self.__files = searchfiles.get_files()
-
-        self.__counter_dirs = searchdirs.dirs_found
-        self.__directories = searchdirs.get_dirs()
+        self.__search(self.path)
 
     def get_files(self):
         return self.__files

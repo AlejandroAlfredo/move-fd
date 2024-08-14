@@ -22,7 +22,9 @@ I recommend viewing the script help.
     ```
     python3 move-fd.py -x "file_or_folder" -o ~/Desktop
     ```
-**Note**: It is recommended to use the full path.
+**Note**: 
+
+It is recommended to use the full path.
 
 ## LICENSE
 move-fd is free software and may be redistributed under the terms specified in the [license]

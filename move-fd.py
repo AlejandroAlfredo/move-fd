@@ -1,60 +1,65 @@
-# python 3.10.6
 import os
 import argparse
 import time
+from extra import search_ff
+from extra import functions
 
-try:
-    from extra import search_ff
-    from extra import functions
-except ImportError as ie:
-    raise Exception(str(ie))
 
 parser = argparse.ArgumentParser(
-    description='Script to easily move files from one place to another.')
+    description="Script to easily move files from one place to another."
+)
 
-group = parser.add_argument_group(description="[move-fd]")
+group_movefd = parser.add_argument_group(description="[move-fd]")
 
-group.add_argument('-x',
-                   '--archive',
-                   type=str,
-                   metavar='',
-                   help='file or folder name, example -x "one.txt"')
+group_movefd.add_argument(
+    "-x",
+    "--archive",
+    type=str,
+    nargs=1,
+    metavar="<file>",
+    help='file or folder name, example -x "one.txt"',
+)
 
-group.add_argument('-o',
-                   '--output',
-                   type=str,
-                   metavar='',
-                   help='output example: -o "{}"'.format(os.getcwd()))
+group_movefd.add_argument(
+    "-o",
+    "--output",
+    type=str,
+    nargs=1,
+    metavar="<path>",
+    help=f'output example: -o "{os.getcwd()}"',
+)
 
-group_search = parser.add_argument_group(
-    description="[search_ff]* ~> Only for folders")
+group_search = parser.add_argument_group(description="[search]* ~> Only for folders")
 
-group_search.add_argument('--files',
-                          dest='files_found',
-                          action='store_true',
-                          help="total number of files.")
+group_search.add_argument(
+    "--files", dest="files_found", action="store_true", help="total number of files."
+)
 
-group_search.add_argument('--folders',
-                          dest='folders_found',
-                          action='store_true',
-                          help="total number of folders.")
+group_search.add_argument(
+    "--folders",
+    dest="folders_found",
+    action="store_true",
+    help="total number of folders.",
+)
 
-group_search.add_argument('--get-files',
-                          dest='get_files',
-                          action='store_true',
-                          help=("print files, "
-                                "(recommendation do not use this if there are many files)"))
+group_search.add_argument(
+    "--get-files",
+    dest="get_files",
+    action="store_true",
+    help=("print files, "),
+)
 
-group_search.add_argument('--get-folders',
-                          dest='get_folders',
-                          action='store_true',
-                          help=("print folders, "
-                                "(recommendation do not use this if there are many folders)"))
+group_search.add_argument(
+    "--get-folders",
+    dest="get_folders",
+    action="store_true",
+    help=("print folders, "),
+)
 
 args = parser.parse_args()
 
 
-def main(args):
+if __name__ == "__main__":
     sff = None  # search_ff
     if args.archive:
         sff = search_ff.Search_FF(args.archive)
@@ -79,7 +84,3 @@ def main(args):
         for f in sff.get_folders():
             time.sleep(0.100)
             print("(folder): " + str(f))
-
-
-if __name__ == '__main__':
-    main(args)

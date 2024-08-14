@@ -1,6 +1,10 @@
+import os
 from cx_Freeze import setup, Executable
 
-build_exe_options = {"excludes": ["pytest", "unittest"], "include_msvcr": False}
+build_exe_options = {
+    "excludes": ["pytest", "unittest"],
+    "include_msvcr": True if os.name in ("nt", "dos") else False,
+}
 
 setup(
     name="move-fd",

@@ -21,6 +21,7 @@ class SearchFiles(threading.Thread):
         full_path = ""
         current = os.listdir(directory)
         for file in current:
+            time.sleep(1 / 1000)
             if os.name in ("linux", "posix", "osx"):
                 full_path = directory + "/" + file
             elif os.name in ("nt", "dos"):

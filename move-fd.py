@@ -1,20 +1,25 @@
 import os
 import argparse
-import time
+import datetime
+from movefd.movefd import MoveFD
+from movefd.searchfiles import SearchFiles
+from movefd.searchdirs import SearchDirectories
+from movefd.searchfd import SearchFD
 
 
 parser = argparse.ArgumentParser(
-    description="Script to easily move files from one place to another."
+    prog="move-fd.py",
+    description="Script to easily move files from one place to another.",
 )
 
 group_movefd = parser.add_argument_group(description="[move-fd]")
 
 group_movefd.add_argument(
     "-x",
-    "--archive",
+    "--source",
     type=str,
     nargs=1,
-    metavar="<file>",
+    metavar="<source>",
     help='file or dir name, example -x "one.txt"',
 )
 
@@ -27,67 +32,86 @@ group_movefd.add_argument(
     help=f'output example: -o "{os.getcwd()}"',
 )
 
-group_search = parser.add_argument_group(description="[search]* ~> Only for folders")
+group_search = parser.add_argument_group(description="[search] ~> Only for dirs")
 
-group_search.add_argument(
-    "--files",
+group_search_exclusive = group_search.add_mutually_exclusive_group()
+
+group_search_exclusive.add_argument(
+    "-F",
+    "--files-found",
     dest="files_found",
     action="store_true",
-    help="total number of files.",
+    help="search files.",
+)
+
+group_search_exclusive.add_argument(
+    "-D",
+    "--dirs-found",
+    dest="dirs_found",
+    action="store_true",
+    help="search directories.",
+)
+
+group_search_exclusive.add_argument(
+    "-A",
+    "--fd-found",
+    dest="fdfound",
+    action="store_true",
+    help="search files and directories",
 )
 
 group_search.add_argument(
-    "--folders",
-    dest="folders_found",
+    "-l",
+    "--log",
+    dest="log",
     action="store_true",
-    help="total number of folders.",
+    help="print log",
 )
 
-group_search.add_argument(
-    "--get-files",
-    dest="get_files",
-    action="store_true",
-    help=("print files, "),
-)
-
-group_search.add_argument(
-    "--get-folders",
-    dest="get_folders",
-    action="store_true",
-    help=("print folders, "),
-)
 
 args = parser.parse_args()
 
 
+def log_message(files, directories, counter_files, counter_dirs):
+    print(f"Date: ({datetime.datetime.now()})\n")
+    print(f"files: ({counter_files}) =>\n {files}\n")
+    print(f"dirs: ({counter_dirs}) =>\n {directories}\n\n")
+
+
 if __name__ == "__main__":
-    sff = None  # search_ff
-    if args.archive:
-        # sff = search_ff.Search_FF(args.archive)
-        pass
+    counter_files = 0
+    counter_dirs = 0
+    files = []
+    directories = []
+    if args.source:
+        instance_sf = SearchFiles(path=args.source[0])
+        instance_sd = SearchDirectories(path=args.source[0])
+        instance_sfd = SearchFD(path=args.source[0])
 
-    if args.archive and args.output:
-        # functions.move_file(args.archive, args.output)
-        pass
+    if args.source and args.output:
+        instance_movefd = MoveFD(args.source[0], args.output[0])
+        instance_movefd.start()
+        instance_movefd.join()
 
-    if args.files_found:
-        # num_files = sff.files_found()
-        # print("(files found): " + str(num_files))
-        pass
+    if args.source and args.files_found:
+        instance_sf.start()
+        instance_sf.join()
+        counter_files = instance_sf.files_found
+        files = instance_sf.get_files()
 
-    if args.get_files:
-        # for f in sff.get_files():
-        #     time.sleep(0.100)
-        #     print("(file): " + str(f))
-        pass
+    if args.source and args.dirs_found:
+        instance_sd.start()
+        instance_sd.join()
+        counter_dirs = instance_sd.dirs_found
+        directories = instance_sd.get_dirs()
 
-    if args.folders_found:
-        # num_folders = sff.folders_found()
-        # print("(folders found): " + str(num_folders))
-        pass
+    if args.source and args.fdfound:
+        instance_sfd.start()
+        instance_sfd.join()
+        counter_files = instance_sfd.files_found
+        counter_dirs = instance_sfd.dirs_found
+        files = instance_sfd.get_files()
+        directories = instance_sfd.get_dirs()
 
-    if args.get_folders:
-        # for f in sff.get_folders():
-        #     time.sleep(0.100)
-        #     print("(folder): " + str(f))
-        pass
+    if args.log:
+        log_message(files, directories, counter_files, counter_dirs)

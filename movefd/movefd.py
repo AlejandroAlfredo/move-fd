@@ -10,8 +10,8 @@ class MoveFD(threading.Thread):
         self.output = output
 
     def run(self):
-        if not os.path.exists(self.source) or not os.path.exists(self.output):
-            raise IOError(f"'{self.output}' does not exist!")
         if os.path.exists(self.source) and os.path.exists(self.output):
             shutil.move(self.source, self.output)
             print(f"(move-fd): '{self.source}' has been moved!")
+        else:
+            raise IOError(f"'{self.output}' does not exist!")

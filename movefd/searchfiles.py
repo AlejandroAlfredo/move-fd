@@ -4,8 +4,14 @@ import threading
 
 
 class SearchFiles(threading.Thread):
-    def __init__(self, path: str, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, path: str, daemon: bool = True, **kwargs):
+        """Search files
+
+        Args:
+            path (str): your full path
+            daemon (bool, optional): daemon. Defaults to True.
+        """
+        super().__init__(daemon=daemon, **kwargs)
         self.path = path
         self.__counter = 0
         self.__files = []
@@ -31,8 +37,9 @@ class SearchFiles(threading.Thread):
     def run(self):
         self.__search(self.path)
 
-    def files_found(self) -> int:
+    @property
+    def files_found(self):
         return self.__counter
 
-    def get_files_path(self) -> list[str]:
+    def get_files(self):
         return self.__files

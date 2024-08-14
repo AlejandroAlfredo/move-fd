@@ -4,8 +4,14 @@ import threading
 
 
 class SearchDirectories(threading.Thread):
-    def __init__(self, path: str, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, path: str, daemon: bool = True, **kwargs):
+        """Search directories.
+
+        Args:
+            path (str): your full path
+            daemon (bool, optional): daemon. Defaults to True.
+        """
+        super().__init__(daemon=daemon, **kwargs)
         self.path = path
         self.__counter = 0
         self.__directories = []
@@ -30,8 +36,9 @@ class SearchDirectories(threading.Thread):
     def run(self):
         self.__search(self.path)
 
-    def dirs_found(self) -> int:
+    @property
+    def dirs_found(self):
         return self.__counter
 
-    def get_dirs_path(self) -> list[str]:
+    def get_dirs(self):
         return self.__directories

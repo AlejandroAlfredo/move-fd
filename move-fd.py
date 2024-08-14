@@ -1,8 +1,6 @@
 import os
 import argparse
 import time
-from extra import search_ff
-from extra import functions
 
 
 parser = argparse.ArgumentParser(
@@ -62,25 +60,31 @@ args = parser.parse_args()
 if __name__ == "__main__":
     sff = None  # search_ff
     if args.archive:
-        sff = search_ff.Search_FF(args.archive)
+        # sff = search_ff.Search_FF(args.archive)
+        pass
 
     if args.archive and args.output:
-        functions.move_file(args.archive, args.output)
+        # functions.move_file(args.archive, args.output)
+        pass
 
     if args.files_found:
-        num_files = sff.files_found()
-        print("(files found): " + str(num_files))
+        # num_files = sff.files_found()
+        # print("(files found): " + str(num_files))
+        pass
 
     if args.get_files:
-        for f in sff.get_files():
-            time.sleep(0.100)
-            print("(file): " + str(f))
+        # for f in sff.get_files():
+        #     time.sleep(0.100)
+        #     print("(file): " + str(f))
+        pass
 
     if args.folders_found:
-        num_folders = sff.folders_found()
-        print("(folders found): " + str(num_folders))
+        # num_folders = sff.folders_found()
+        # print("(folders found): " + str(num_folders))
+        pass
 
     if args.get_folders:
-        for f in sff.get_folders():
-            time.sleep(0.100)
-            print("(folder): " + str(f))
+        # for f in sff.get_folders():
+        #     time.sleep(0.100)
+        #     print("(folder): " + str(f))
+        pass
